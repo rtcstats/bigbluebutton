@@ -40,6 +40,7 @@ public class ValidationService {
         GET_SESSIONS("getSessions", RequestType.GET),
         GUEST_WAIT("guestWait", RequestType.GET),
         STUNS("stuns", RequestType.GET),
+        RTCSTATS("rtcstats", RequestType.GET),
         SIGN_OUT("signOut", RequestType.GET),
         LEARNING_DASHBOARD("learningDashboard", RequestType.GET),
         GET_JOIN_URL("getJoinUrl", RequestType.GET),
@@ -132,6 +133,7 @@ public class ValidationService {
                 case SEND_CHAT_MESSAGE -> new SendChatMessage(checksum, servletRequest);
                 case GUEST_WAIT -> new GuestWait(servletRequest);
                 case STUNS -> new Stuns(servletRequest);
+                case RTCSTATS -> new RtcStats(servletRequest);
                 case SIGN_OUT -> new SignOut(servletRequest);
                 case LEARNING_DASHBOARD -> new LearningDashboard(servletRequest);
                 case GET_JOIN_URL -> new GetJoinUrl(servletRequest);

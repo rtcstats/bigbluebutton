@@ -639,6 +639,7 @@ export interface Media {
   cacheStunTurnServers: boolean
   fallbackStunServer: string
   rtcstatsEndpoint: string
+  rtcstatsTokenFetchAddress: string
   forceRelay: boolean
   forceRelayOnFirefox: boolean
   mediaTag: string

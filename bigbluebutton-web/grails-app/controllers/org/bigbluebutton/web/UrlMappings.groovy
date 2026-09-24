@@ -99,6 +99,10 @@ class UrlMappings {
       action = [GET: 'stuns', POST: 'stuns']
     }
 
+    "/bigbluebutton/api/rtcstats"(controller: "api") {
+      action = [GET: 'rtcstats', POST: 'rtcstats']
+    }
+
     "/bigbluebutton/api/signOut"(controller: "api") {
       action = [GET: 'signOut', POST: 'signOut']
     }
