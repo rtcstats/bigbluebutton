@@ -864,6 +864,7 @@ public:
     fallbackStunServer: ''
     # WebSocket URL of an rtcstats-server, empty disables it
     rtcstatsEndpoint: ''
+    rtcstatsTokenFetchAddress: '/bigbluebutton/api/rtcstats'
     # Forces relay usage on all browsers, environments and media modules.
     # If true, supersedes public.kurento.forceRelayOnFirefox
     forceRelay: false

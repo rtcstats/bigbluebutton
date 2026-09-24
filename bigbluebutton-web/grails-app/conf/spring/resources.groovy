@@ -5,6 +5,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.grails.web.filters.HiddenHttpMethodFilter
 
 Logger logger = LoggerFactory.getLogger("org.bigbluebutton.web.services.turn.StunTurnService")
+Logger rtcStatsLogger = LoggerFactory.getLogger("org.bigbluebutton.web.services.rtcstats.RtcStatsService")
 
 beans = {
   def turnConfigFilePath = "/etc/bigbluebutton/turn-stun-servers.xml"
@@ -16,6 +17,15 @@ beans = {
     logger.info("Overlay stun/turn server config file " + turnConfigFilePath
       + " not found/readable, reading from default config file location")
     importBeans('spring/turn-stun-servers.xml')
+  }
+
+  def rtcStatsConfigFilePath = "/etc/bigbluebutton/rtcstats.xml"
+  def rtcStatsConfigFile = new File(rtcStatsConfigFilePath)
+  if (rtcStatsConfigFile.canRead()) {
+    rtcStatsLogger.info("Reading rtcstats config from overlay config file " + rtcStatsConfigFilePath)
+    importBeans('file:' + rtcStatsConfigFilePath)
+  } else {
+    importBeans('spring/rtcstats.xml')
   }
 
   hiddenHttpMethodFilter(FilterRegistrationBean) {

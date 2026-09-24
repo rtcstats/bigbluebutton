@@ -611,6 +611,7 @@ export const meetingClientSettingsInitialValues: MeetingClientSettings = {
       cacheStunTurnServers: true,
       fallbackStunServer: '',
       rtcstatsEndpoint: '',
+      rtcstatsTokenFetchAddress: '/bigbluebutton/api/rtcstats',
       forceRelay: false,
       forceRelayOnFirefox: true,
       mediaTag: '#remote-media',

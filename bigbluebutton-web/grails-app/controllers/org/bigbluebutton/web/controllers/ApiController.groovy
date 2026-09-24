@@ -44,6 +44,7 @@ import org.bigbluebutton.web.services.PresentationService
 import org.bigbluebutton.web.services.turn.RemoteIceCandidate
 import org.bigbluebutton.web.services.turn.StunServer
 import org.bigbluebutton.web.services.turn.StunTurnService
+import org.bigbluebutton.web.services.rtcstats.RtcStatsService
 import org.bigbluebutton.web.services.turn.TurnEntry
 import org.codehaus.groovy.util.ListHashMap
 import org.json.JSONArray
@@ -64,6 +65,7 @@ class ApiController {
   ParamsProcessorUtil paramsProcessorUtil
   PresentationUrlDownloadService presDownloadService
   StunTurnService stunTurnService
+  RtcStatsService rtcStatsService
   ResponseBuilder responseBuilder = initResponseBuilder()
   ValidationService validationService
 
@@ -1123,6 +1125,54 @@ class ApiController {
           }
           render(contentType: "application/json", text: builder.toPrettyString())
         }
+      }
+    }
+  }
+
+  /*************************************************
+   * RTCSTATS API
+   *************************************************/
+  def rtcstats = {
+    String API_CALL = 'rtcstats'
+    log.debug CONTROLLER_NAME + "#${API_CALL}"
+
+    boolean reject = false;
+
+    String sessionToken
+    UserSession us
+
+    Map.Entry<String, String> validationResponse = validateRequest(
+            ValidationService.ApiCall.RTCSTATS,
+            request
+    )
+
+    if(!(validationResponse == null)) {
+      reject = true
+    } else {
+      sessionToken = sanitizeSessionToken(params.sessionToken)
+      us = getUserSession(sessionToken)
+
+      if (!hasValidSession(sessionToken)) {
+        reject = true;
+      }
+    }
+
+    response.addHeader("Cache-Control", "no-cache")
+    withFormat {
+      json {
+        def builder = new JsonBuilder()
+        if (reject) {
+          builder {
+            returncode RESP_CODE_FAILED
+            message "Could not find conference."
+          }
+        } else {
+          builder {
+            returncode RESP_CODE_SUCCESS
+            rtcstatsToken rtcStatsService.generateTokenFor(us.internalUserId, us.meetingID)
+          }
+        }
+        render(contentType: "application/json", text: builder.toPrettyString())
       }
     }
   }
