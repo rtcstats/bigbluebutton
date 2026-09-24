@@ -862,6 +862,8 @@ public:
     stunTurnServersFetchAddress: '/bigbluebutton/api/stuns'
     cacheStunTurnServers: true
     fallbackStunServer: ''
+    # WebSocket URL of an rtcstats-server, empty disables it
+    rtcstatsEndpoint: ''
     # Forces relay usage on all browsers, environments and media modules.
     # If true, supersedes public.kurento.forceRelayOnFirefox
     forceRelay: false

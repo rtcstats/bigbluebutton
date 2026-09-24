@@ -610,6 +610,7 @@ export const meetingClientSettingsInitialValues: MeetingClientSettings = {
       stunTurnServersFetchAddress: '/bigbluebutton/api/stuns',
       cacheStunTurnServers: true,
       fallbackStunServer: '',
+      rtcstatsEndpoint: '',
       forceRelay: false,
       forceRelayOnFirefox: true,
       mediaTag: '#remote-media',

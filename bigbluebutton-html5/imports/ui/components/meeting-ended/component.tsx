@@ -22,6 +22,7 @@ import Styled from './styles';
 import { LoadingContext } from '../common/loading-screen/loading-screen-HOC/component';
 import logger from '/imports/startup/client/logger';
 import apolloContextHolder from '/imports/ui/core/graphql/apolloContextHolder/apolloContextHolder';
+import { close as closeRtcStats } from '/imports/ui/services/rtcstats';
 import useMeeting from '../../core/hooks/useMeeting';
 import useCurrentUser from '../../core/hooks/useCurrentUser';
 
@@ -297,6 +298,8 @@ const MeetingEnded: React.FC<MeetingEndedProps> = ({
         ws.dispose();
       }, 5000);
     }
+    // closes the rtcstats connection after 5 seconds, if made immediately some data is lost
+    setTimeout(closeRtcStats, 5000);
   }, []);
 
   useEffect(() => {
