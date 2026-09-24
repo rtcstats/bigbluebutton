@@ -7,6 +7,7 @@ import useSettings from '/imports/ui/services/settings/hooks/useSettings';
 import { SETTINGS } from '/imports/ui/services/settings/enums';
 import { layoutDispatch } from '/imports/ui/components/layout/context';
 import logger from '/imports/startup/client/logger';
+import { connect as connectRtcStats } from '/imports/ui/services/rtcstats';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -49,6 +50,8 @@ class Base extends Component {
     if (isLegacyBundle) {
       logger.warn({ logCode: 'legacy_browser_bundle_loaded' }, 'Client loaded using legacy bundle');
     }
+
+    connectRtcStats();
   }
 
   componentDidUpdate(prevProps) {

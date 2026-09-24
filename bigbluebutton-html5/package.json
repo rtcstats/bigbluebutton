@@ -74,6 +74,7 @@
     "@mui/icons-material": "^6.1.4",
     "@mui/material": "^6.1.4",
     "@mui/system": "^5.12.3",
+    "@rtcstats/rtcstats-js": "^2.5.0",
     "@tiptap/core": "3.13.0",
     "@tiptap/pm": "3.13.0",
     "@types/node": "^20.5.7",
